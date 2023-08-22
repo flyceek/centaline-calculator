@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+    <title>贷款计算器</title>
+    <link rel="stylesheet" href="css/result-indexOrPublic.css">
+    <script src="js/rem初始化.js"></script>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/result-indexOrPublic.js"></script>
+    <script type='text/javascript'>
+        ! function(e, t, n, g, i) {
+            e[i] = e[i] || function() {
+                (e[i].q = e[i].q || []).push(arguments)
+            }, n = t.createElement("script"), tag = t.getElementsByTagName("script")[0], n.async = 1, n.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + g, tag.parentNode.insertBefore(n, tag)
+        }(window, document, "script", "assets.giocdn.com/2.1/gio.js", "gio");
+        gio('init', '89d1ccf572d9fa18', {});
+        gio('send');
+    </script>
+</head>
+
+<body>
+    <div class="result">
+        <div class="result-nav">
+            <ul>
+                <li class="nav-selected"><span>等额本息</span></li>
+                <li><span>等额本金</span></li>
+            </ul>
+        </div>
+        <div class="result-title">
+            <div class="totalRepayment">
+                <div class="totalRepayment-name">还款总额</div>
+                <div class="totalRepayment-number">
+                    <span>109.9</span>万
+                </div>
+            </div>
+            <div class="loan-detail">
+                <ul>
+                    <li>
+                        <div>贷款总额</div>
+                        <div id="result_loanAllMoney" class="detail-number"><span>70</span>万</div>
+                    </li>
+                    <li>
+                        <div>利息总额</div>
+                        <div id="result_totalInterest" class="detail-number"><span>59.94</span>万</div>
+                    </li>
+                    <li>
+                        <div>贷款年限</div>
+                        <div id="result_monthsy" class="detail-number"><span>30</span>年</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="explainBg">
+            <div class="explainBg-img">
+                <img src="images/price_1.png" alt="">
+            </div>
+            <div class="explainBg-content">
+                <span>每月还款金额不变</span>，其中还款的本金逐月递增,利息逐月递减,计算结果仅供参考。
+            </div>
+        </div>
+        <div class="tableBg">
+            <table id="gprs">
+                <thead>
+                    <tr>
+                        <th>期数</th>
+                        <th>月供总额</th>
+                        <th>月供本金</th>
+                        <th>月供利息</th>
+                        <th>剩余本金</th>
+                    </tr>
+                </thead>
+            </table>
+            <table>
+
+
+                <tbody>
+                    <tr>
+                        <td>360</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                        <td>12345.6</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

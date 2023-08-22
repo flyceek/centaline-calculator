@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+    <title>房贷计算器</title>
+    <link rel="stylesheet" href="css/portfolio.css">
+    <link rel="stylesheet" href="css/picker.css">
+    <script src="js/rem初始化.js"></script>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/portfolio.js"></script>
+    <script src="js/picker.js"></script>
+    <script type='text/javascript'>
+        ! function(e, t, n, g, i) {
+            e[i] = e[i] || function() {
+                (e[i].q = e[i].q || []).push(arguments)
+            }, n = t.createElement("script"), tag = t.getElementsByTagName("script")[0], n.async = 1, n.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + g, tag.parentNode.insertBefore(n, tag)
+        }(window, document, "script", "assets.giocdn.com/2.1/gio.js", "gio");
+        gio('init', '89d1ccf572d9fa18', {});
+        gio('send');
+    </script>
+</head>
+
+<body>
+    <div class="loan-index">
+        <div class="index-titleBg marTop120">
+            <div class="index-title">
+                <div class="go-back">
+                    <a href="https://m.sh.centanet.com/"><img src="images/go-back.png" alt=""></a>
+                </div>
+                <div class="title-content">房贷计算器</div>
+            </div>
+        </div>
+        <div class="index-content">
+            <div class="content-nav">
+                <ul>
+                    <a href="index.html">
+                        <li>商业贷款</li>
+                    </a>
+                    <a href="publicAccumulationFunds.html">
+                        <li>公积金贷款</li>
+                    </a>
+                    <a href="#">
+                        <li class="loan-typeSelected">组合贷款</li>
+                    </a>
+
+                </ul>
+            </div>
+
+            <!--公积金贷款-->
+            <div class="accordingType-project">
+                <div class="loanType-public">
+                    <img src="images/price.png" alt=""> 公积金贷款
+                </div>
+                <ul style="margin-bottom:.6rem;">
+                    <li>
+                        <div class="w182">贷款总额</div>
+                        <div class="w338 totalfs">
+                            <input onkeyup="this.value=this.value.replace(/\s/g,'')" id="pub_loanAllMoney" type="text" placeholder="请输入金额" />
+                        </div>
+                        <div style="float: right;color: #999;">万元</div>
+                    </li>
+                    <li>
+                        <div class="w182">贷款年限</div>
+                        <div id="showDatePicker" class="w428 totalfs-1"><span>30年(360期)</span>
+                            <div class="w60" style="float: right;">
+                                <img src="images/go-select.png" alt="">
+                            </div>
+                        </div>
+
+                    </li>
+
+                    <li>
+                        <div class="w182">公积金利率</div>
+                        <div class="w428 totalfs rate">
+                            <span id="pub_gjj">3.25</span><span style="margin: 0 .15rem;">x</span> <input onkeyup="this.value=this.value.replace(/\s/g,'')" id="pub_multiple" type="text" value="1" /> <span style="margin: 0 .15rem;">=</span> <span id="pub_loan_rateResult"
+                                class="loan-rateResult">3.25%</span>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+        </div>
+        <div class="index-content_1">
+
+            <!--商业贷款-->
+            <div class="accordingType-project">
+                <div class="loanType-sy">
+                    <img src="images/price.png" alt=""> 商业贷款
+                </div>
+                <ul>
+                    <li>
+                        <div class="w182">首套贷款</div>
+                        <div class="radio-group">
+                            <div class="item">
+                                <input type="radio" name="firstHouse3" id="fh1_3" data-value="是" checked>
+                                <label for="fh1_3">是</label>
+                            </div>
+                            <div class="item">
+                                <input type="radio" name="firstHouse3" data-value="否" id="fh2_3">
+                                <label for="fh2_3">否</label>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="w182">贷款总额</div>
+                        <div class="w338 totalfs">
+                            <input onkeyup="this.value=this.value.replace(/\s/g,'')" id="sd_loanAllMoney" type="text" placeholder="请输入金额" />
+                        </div>
+                        <div style="float: right;color: #999;">万元</div>
+                    </li>
+                    <li>
+                        <div class="w182">贷款年限</div>
+                        <div id="dk_showDaTe" class="w428 totalfs-1"><span>30年(360期)</span>
+                            <div class="w60" style="float: right;">
+                                <img src="images/go-select.png" alt="">
+                            </div>
+                        </div>
+
+                    </li>
+                    <li>
+                        <div class="w182">利率方式</div>
+                        <div id="dk_showRate" class="w428 totalfs-1"><span>LPR浮动利率</span>
+                            <div class="w60" style="float: right;">
+                                <img src="images/go-select.png" alt="">
+                            </div>
+                        </div>
+
+                    </li>
+                    <li id="dk_sdRate" style="display: none;">
+                        <div class="w182">商贷利率</div>
+                        <div class="w428 totalfs rate">
+                            <span><input onkeyup="this.value=this.value.replace(/\s/g,'')" id="sd_benchmark_num" type="text" value="4.9" /></span><span style="margin: 0 .15rem;">x</span> <input onkeyup="this.value=this.value.replace(/\s/g,'')" id="sd_multiple" type="text" value="1" /> <span style="margin: 0 .15rem;">=</span> <span id="sd_loan_rateResult"
+                                class="loan-rateResult">4.9%</span>
+                        </div>
+                    </li>
+                    <li id="dk_lpr">
+                        <div class="w182" style="line-height: 0;">
+                            <div class="lprName-1">LPR</div><br/>
+                            <div class="lprName-2">可手动修改</div>
+                        </div>
+                        <div class="w338">
+                            <input onkeyup="this.value=this.value.replace(/\s/g,'')" id="sd_lprNum" class="lprNum" type="text" value="4.45" />
+                        </div>
+                        <div style="float: right;color: #999;">%</div>
+                    </li>
+                    <li id="dk_jd">
+                        <div class="w182">基点</div>
+                        <div class="w338">
+                            <!-- <div class="upAndDown">
+                                <div id="sd_up" class="up">增加</div>
+                                <div id="sd_down" class="down">减少</div>
+                            </div> -->
+                            <div class="jdNum">
+                                <input id="sd_jdNum" type="text" value="35" />
+                            </div>
+                        </div>
+
+                        <div class="w90">
+                            BP(‰)
+                        </div>
+                    </li>
+                    <li id="dk_lprsdRate">
+                        <div class="w182">商贷利率</div>
+                        <div class="w428 totalfs rate">
+                            <span id="sd_lpr">5%</span> <span style="margin: 0 .15rem;">+</span> <span id="sd_jd">35‱</span> <span style="margin: 0 .15rem;">=</span> <span id="sd_loan_rateResult_1" class="loan-rateResult">5.35%</span>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="restartBtnBg">
+                    <span id="pubAndSd_restart" class="restartBtn">重新填写</span>
+                </div>
+            </div>
+
+
+        </div>
+        <div id="calc" class="calcBtn activeBtn">开始计算</div>
+
+    </div>
+    <!--遮罩层-->
+    <div id="birthPicker" class="zxjPicker">
+        <div class="operatePicker">
+            <div class="picker-title">选择贷款年限</div>
+            <div class="canclePicker">
+                <img src="images/cancel.png" alt="">
+            </div>
+
+        </div>
+        <div class="contentPicker">
+        </div>
+        <div class="okPicker">确认</div>
+    </div>
+    <div id="birthPicker_1" class="zxjPicker" style="display: none;">
+        <div class="operatePicker">
+            <div class="picker-title">选择贷款年限</div>
+            <div class="canclePicker">
+                <img src="images/cancel.png" alt="">
+            </div>
+
+        </div>
+        <div class="contentPicker">
+        </div>
+        <div class="okPicker">确认</div>
+    </div>
+    <div id="rateStylePicker_1" class="zxjPicker">
+        <div class="operatePicker">
+            <div class="picker-title">选择利率方式</div>
+            <div class="canclePicker">
+                <img src="images/cancel.png" alt="">
+            </div>
+
+        </div>
+        <div class="contentPicker">
+        </div>
+        <div class="okPicker">确认</div>
+    </div>
+    <div class="promptBox" style="display: none;">
+        <img src="images/iconfontgantanhao2@2x.png" alt="">
+        <span style="float: right;">输入限大于0的数字</span>
+    </div>
+    <div class="promptBox_1" style="display: none;">
+        <img src="images/iconfontgantanhao2@2x.png" alt="">
+        <span style="float: right;">输入限大于0的数字</span>
+    </div>
+
+
+    <script type="text/javascript">
+        $(function() {
+
+            function isFirsthouseCheckedhandle() {
+                var isFirst = $('input[name=firstHouse3]:checked').data('value');
+                var loanYear = $('#dk_showDaTe span').html();
+                var bpNum = null
+
+                if (isFirst === '是') {
+                    bpNum = loanYear.match(/(\S*)年/)[1] > 5 ? 35 : 85
+                } else {
+                    bpNum = loanYear.match(/(\S*)年/)[1] > 5 ? 105 : 155
+                }
+
+                $('#sd_jdNum').val(bpNum)
+                $('#sd_jd').html(bpNum + '‱')
+                var lprNum = $('#sd_lprNum').val()*1
+                $('#sd_loan_rateResult_1').html(lprNum + $('#sd_jd').html().split('‱')[0] / 100 + '%')
+            }
+
+            $('input[name=firstHouse3]').on('change', function() {
+                isFirsthouseCheckedhandle()
+            })
+
+            //贷款年限
+            var yearArr = new Array();
+
+            var end = 30;
+            for (var i = 1; i <= end; i++) {
+                yearArr[i - 1] = new Object();
+                yearArr[i - 1].name = i + '年(' + i * 12 + '期)'
+                yearArr[i - 1].value = i + '年(' + i * 12 + '期)';
+            }
+
+            selfPicker.start({
+                id: 'birthPicker',
+                action: 'showDatePicker',
+                content: [
+                    yearArr
+                ],
+                select: function(result) {
+                    // console.log(result);
+                    $('#showDatePicker span').html(result[0]);
+                    console.log(result[0].match(/(\S*)年/)[1]);
+                    if (result[0].match(/(\S*)年/)[1] > 5) {
+                        $('#pub_gjj').html(3.25)
+                        $('#pub_loan_rateResult').html((3.25 * $('#pub_multiple').val()).toFixed(2) + '%')
+
+                    } else if (result[0].match(/(\S*)年/)[1] <= 5) {
+                        $('#pub_gjj').html(2.75)
+                        $('#pub_loan_rateResult').html((2.75 * $('#pub_multiple').val()).toFixed(2) + '%')
+                    }
+                }
+            });
+            var yearArr_1 = new Array();
+            for (var i = 1; i <= end; i++) {
+                yearArr_1[i - 1] = new Object();
+                yearArr_1[i - 1].name = i + '年(' + i * 12 + '期)'
+                yearArr_1[i - 1].value = i + '年(' + i * 12 + '期)';
+            }
+            selfPicker.start({
+                id: 'birthPicker_1',
+                action: 'dk_showDaTe',
+                content: [
+                    yearArr_1
+                ],
+                select: function(result) {
+                    // console.log(result);
+                    $('#dk_showDaTe span').html(result[0]);
+                    console.log(result[0].match(/(\S*)年/)[1]);
+                    if (result[0].match(/(\S*)年/)[1] > 5) {
+                        $('#sd_lprNum').val(4.45)
+                        $('#sd_lpr').html(4.45 + '%')
+                        // $('#sd_jdNum').val(35)
+                        // $('#sd_jd').html(35 + '‱')
+                        // $('#sd_loan_rateResult_1').html(4.45 + $('#sd_jd').html().split('‱')[0] / 100 + '%')
+                        isFirsthouseCheckedhandle()
+
+                    } else if (result[0].match(/(\S*)年/)[1] <= 5) {
+                        $('#sd_lprNum').val(3.7)
+                        $('#sd_lpr').html(3.7 + '%')
+                        // $('#sd_jdNum').val(0)
+                        // $('#sd_jd').html(0 + '‱')
+                        // $('#sd_loan_rateResult_1').html(3.7 + $('#sd_jd').html().split('‱')[0] / 100 + '%')
+                        isFirsthouseCheckedhandle()
+                    }
+                }
+            });
+            var rateStyle_1 = new Array();
+            rateStyle_1[0] = new Object();
+            rateStyle_1[0].name = '旧版本基准利率';
+            rateStyle_1[0].value = '旧版本基准利率';
+            rateStyle_1[1] = new Object();
+            rateStyle_1[1].name = 'LPR浮动利率';
+            rateStyle_1[1].value = 'LPR浮动利率';
+            selfPicker.start({
+                id: 'rateStylePicker_1',
+                action: 'dk_showRate',
+                content: [
+                    rateStyle_1
+                ],
+
+                select: function(result) {
+                    $('#dk_showRate span').html(result[0]);
+                    if (result[0] == '旧版本基准利率') {
+                        $('#dk_sdRate').show();
+                        $('#dk_lpr').hide();
+                        $('#dk_jd').hide();
+                        $('#dk_lprsdRate').hide();
+
+                    } else if (result[0] == 'LPR浮动利率') {
+                        $('#dk_sdRate').hide();
+                        $('#dk_lpr').show();
+                        $('#dk_jd').show();
+                        $('#dk_lprsdRate').show();
+                    }
+                }
+            });
+
+
+
+
+        });
+    </script>
+</body>
+
+</html>
