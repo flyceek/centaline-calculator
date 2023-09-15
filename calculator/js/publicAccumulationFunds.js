@@ -124,16 +124,17 @@ $(function() {
             //获取首付比例
             var fhRate = $('#first_houseRate').val();
             console.log(fhRate / 100)
+            var loanAllMoneyMax=144;
             var loanAllMoney = hmAll * (1 - fhRate / 100);
-            if (loanAllMoney <= 120) {
+            if (loanAllMoney <= loanAllMoneyMax) {
                 loanAllMoney = loanAllMoney.toFixed(2)
                 if (loanAllMoney == 0.00) {
                     loanAllMoney = ''
                 }
             } else {
-                loanAllMoney = 120;
+                loanAllMoney = loanAllMoneyMax;
                 $('.promptBox_1').show()
-                $('.promptBox_1 span').html('目前上海公积金贷款金额上限120万')
+                $('.promptBox_1 span').html('目前上海公积金贷款金额上限'+loanAllMoneyMax+'万')
                 setTimeout("$('.promptBox_1').hide()", 1000)
             }
             $('#gjj_loanAllMoney').val(loanAllMoney);
@@ -145,6 +146,7 @@ $(function() {
     $('#first_houseRate').on('input propertychange', function() {
         //获取房屋总价
         var hmAll = $('#aj_houseMoney').val();
+        var loanAllMoneyMax=144;
         console.log(hmAll);
 
         var fhRate = $('#first_houseRate').val();
@@ -169,7 +171,7 @@ $(function() {
                 if (hmAll != null || hmAll != '') {
                     var loanAllMoney = Number.parseFloat(hmAll) * (1 - (Number.parseFloat(fhRate) / 100));
                     if (!isNaN(loanAllMoney)) {
-                        if (loanAllMoney <= 120) {
+                        if (loanAllMoney <= loanAllMoneyMax) {
                             if (loanAllMoney < 0) {
                                 loanAllMoney = 0;
                             } else {
@@ -178,10 +180,10 @@ $(function() {
 
                         } else {
                             $('.promptBox_1').show()
-                            $('.promptBox_1 span').html('目前上海公积金贷款金额上限120万')
+                            $('.promptBox_1 span').html('目前上海公积金贷款金额上限'+loanAllMoneyMax+'万')
                             console.log(hmAll);
                             setTimeout("$('.promptBox_1').hide()", 1000)
-                            loanAllMoney = 120;
+                            loanAllMoney = loanAllMoneyMax;
                         }
                         $('#gjj_loanAllMoney').val(loanAllMoney);
                     }
@@ -221,7 +223,7 @@ $(function() {
         if (hmAll != null && hmAll != '') {
             var loanAllMoney = Number.parseFloat(hmAll) * (1 - (Number.parseFloat(fhRate) / 100));
             console.log(loanAllMoney)
-            if (loanAllMoney <= 120) {
+            if (loanAllMoney <= loanAllMoneyMax) {
                 if (loanAllMoney < 0) {
                     loanAllMoney = 0;
                 } else {
@@ -232,7 +234,7 @@ $(function() {
                 // $('.promptBox_1').show()
                 // $('.promptBox_1 span').html('目前上海公积金贷款金额上限120万')
                 // setTimeout("$('.promptBox_1').hide()", 800)
-                loanAllMoney = 120;
+                loanAllMoney = loanAllMoneyMax;
             }
             $('#gjj_loanAllMoney').val(loanAllMoney);
         }
@@ -242,6 +244,7 @@ $(function() {
     //按揭--公积金贷款
 
     $('#gjj_loanAllMoney').on('input propertychange', function() {
+        var lAmoneyMax=144;
         var lAmoney = $('#gjj_loanAllMoney').val();
         if (lAmoney == ' ' || lAmoney == null) {
             lAmoney == ''
@@ -261,20 +264,18 @@ $(function() {
                     }
                 }
             }
-
         } else {
             lAmoney = ''
             $('.promptBox').show()
             $('.promptBox span').html('输入金额限>0的数字')
             setTimeout("$('.promptBox').hide()", 1000)
-
         }
 
-        if (lAmoney > 120) {
+        if (lAmoney > lAmoneyMax) {
             $('.promptBox_1').show()
-            $('.promptBox_1 span').html('目前上海公积金贷款金额上限120万')
+            $('.promptBox_1 span').html('目前上海公积金贷款金额上限'+lAmoneyMax+'万')
             setTimeout("$('.promptBox_1').hide()", 1000)
-            lAmoney = 120
+            lAmoney = lAmoneyMax
         }
 
         $('#gjj_loanAllMoney').val(lAmoney);
@@ -332,6 +333,7 @@ $(function() {
     //贷款--贷款总额
 
     $('#dk_loanALLMoney').on('input propertychange', function() {
+        var dk_loanAllMoneyMax=144;
         var dk_loanAllMoney = $('#dk_loanALLMoney').val();
         console.log(dk_loanAllMoney)
         if (dk_loanAllMoney == null || dk_loanAllMoney == ' ') {
@@ -344,17 +346,12 @@ $(function() {
                 $('.promptBox').show()
                 $('.promptBox span').html('请输入大于0的数字')
                 setTimeout("$('.promptBox').hide()", 1000)
-            } else if (dk_loanAllMoney > 120) {
-
-                dk_loanAllMoney = 120;
+            } else if (dk_loanAllMoney > dk_loanAllMoneyMax) {
+                dk_loanAllMoney = dk_loanAllMoneyMax;
                 $('.promptBox_1').show()
-                $('.promptBox_1 span').html('目前上海公积金贷款金额上限120万')
+                $('.promptBox_1 span').html('目前上海公积金贷款金额上限'+dk_loanAllMoneyMax+'万')
                 setTimeout("$('.promptBox_1').hide()", 1000)
-
-
             } else {
-
-
                 console.log(dk_loanAllMoney)
                 if (dk_loanAllMoney.indexOf('.') != -1) {
                     if (dk_loanAllMoney.split('.')[1].length > 2) {

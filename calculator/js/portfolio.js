@@ -93,6 +93,7 @@ $(function () {
 
     //公积金--贷款总额
     $('#pub_loanAllMoney').on('input propertychange', function (event) {
+        var pubLmMax=144;
         var pubLm = $('#pub_loanAllMoney').val();
         if (pubLm == ' ' || pubLm == null) {
             pubLm == ''
@@ -105,11 +106,11 @@ $(function () {
                 $('.promptBox').show()
                 $('.promptBox span').html('请输入>0的金额')
                 setTimeout("$('.promptBox').hide()", 1000)
-            } else if (pubLm > 120) {
-                pubLm = 120;
+            } else if (pubLm > pubLmMax) {
+                pubLm = pubLmMax;
                 // $('#pub_loanAllMoney').val(120);
                 $('.promptBox_1').show()
-                $('.promptBox_1 span').html('目前上海公积金贷款金额上限120万')
+                $('.promptBox_1 span').html('目前上海公积金贷款金额上限'+pubLmMax+'万')
                 setTimeout("$('.promptBox_1').hide()", 1000);
             } else {
 
