@@ -264,15 +264,13 @@ $(function() {　　
         var a = $(this).find('span').html();
         if (a == '等额本息') {
             console.log('等额本息')
-            // $('.explainBg-content span').html('每月还款金额不变')
-            $('.explainBg-content').html('<span>每月还款金额不变</span>，其中还款的本金逐月递增，利息逐月递减，计算结果仅供参考。')
+            $('.explainBg-content span').html('每月还款金额不变')
             xr(EqualPrincipalAndInterest_1)
         } else if (a = '等额本金') {
             console.log('等额本金')
             var a = equivalentPrincipal_1
             var b = Number.parseFloat(a.monthlyMinus).toFixed(2)
-            // $('.explainBg-content span').html('每月还款金额递减' + b + '元')
-            $('.explainBg-content').html('<span>每月还款金额递减'+  b +'元</span>，其中还款的本金每月相同，利息逐月递减，计算结果仅供参考。')
+            $('.explainBg-content span').html('每月还款金额递减' + b + '元')
             xr(equivalentPrincipal_1)
 
         }

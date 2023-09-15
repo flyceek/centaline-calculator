@@ -1,26 +1,26 @@
-$(function () {
+$(function() {
 
     //公积金
-    $('#showDatePicker').on('click', function () {
+    $('#showDatePicker').on('click', function() {
         $("body").css("overflow", "hidden");
         $("#birthPicker").show();
         $("#birthPicker_1").hide();
         $("#rateStylePicker_1").hide();
     })
 
-    $('.okPicker,.canclePicker').on('click', function () {
+    $('.okPicker,.canclePicker').on('click', function() {
         $("body").css("overflow", "auto");
     })
 
 
     //商贷
-    $('#dk_showDaTe').on('click', function () {
+    $('#dk_showDaTe').on('click', function() {
         $("body").css("overflow", "hidden");
         $("#birthPicker").hide();
         $("#birthPicker_1").show();
         $("#rateStylePicker_1").hide();
     })
-    $('#dk_showRate').on('click', function () {
+    $('#dk_showRate').on('click', function() {
         $("body").css("overflow", "hidden");
         $("#birthPicker").hide();
         $("#birthPicker_1").hide();
@@ -37,7 +37,7 @@ $(function () {
     function init() {
         var a = $('#pub_multiple').val();
         a = Number.parseFloat(a);
-        var b = a * 3.1
+        var b = a * 3.25
         b = b.toFixed(2);
         $('#pub_loan_rateResult').html(b + '%');
         var c = $('#sd_lprNum').val();
@@ -79,12 +79,12 @@ $(function () {
     }
 
     //截取参数
-    function canShu(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-        var r = window.location.search.substr(1).match(reg);
-        if (r != null)
-            return unescape(r[2]);
-        return null;
+    function  canShu(name)  { 
+        var  reg  =  new  RegExp("(^|&)"  +  name  +  "=([^&]*)(&|$)",  "i");        
+        var  r  =  window.location.search.substr(1).match(reg);        
+        if  (r  !=  null) 
+            return  unescape(r[2]);        
+        return  null;    
     }
 
 
@@ -92,7 +92,7 @@ $(function () {
     //页面获取数
 
     //公积金--贷款总额
-    $('#pub_loanAllMoney').on('input propertychange', function (event) {
+    $('#pub_loanAllMoney').on('input propertychange', function(event) {
         var pubLm = $('#pub_loanAllMoney').val();
         if (pubLm == ' ' || pubLm == null) {
             pubLm == ''
@@ -175,7 +175,7 @@ $(function () {
 
 
     //公积金--上浮
-    $('#pub_multiple').on('input propertychange', function () {
+    $('#pub_multiple').on('input propertychange', function() {
         var pubMul = $('#pub_multiple').val();
         if (pubMul == ' ' || pubMul == null) {
             pubMul == ''
@@ -212,14 +212,14 @@ $(function () {
         }
 
         $('#pub_multiple').val(pubMul);
-        $('#pub_loan_rateResult').html((pubMul * 3.1).toFixed(2) + '%')
+        $('#pub_loan_rateResult').html((pubMul * 3.25).toFixed(2) + '%')
         activeBtn();
 
     })
 
 
     //商业贷款--贷款总额
-    $('#sd_loanAllMoney').on('input propertychange', function () {
+    $('#sd_loanAllMoney').on('input propertychange', function() {
         var sdlAm = $('#sd_loanAllMoney').val();
         if (sdlAm == ' ' || sdlAm == null) {
             sdlAm == ''
@@ -252,7 +252,7 @@ $(function () {
     })
 
     //商业贷款--旧版--折扣
-    $('#sd_benchmark_num').on('input propertychange', function () {
+    $('#sd_benchmark_num').on('input propertychange', function() {
         var sd_benchmark_num = $('#sd_benchmark_num').val();
         if (sd_benchmark_num == ' ' || sd_benchmark_num == null) {
             sd_benchmark_num == ''
@@ -288,7 +288,7 @@ $(function () {
     })
 
 
-    $('#sd_multiple').on('input propertychange', function () {
+    $('#sd_multiple').on('input propertychange', function() {
         var sdMul = $('#sd_multiple').val();
         if (sdMul == ' ' || sdMul == null) {
             sdMul == ''
@@ -332,7 +332,7 @@ $(function () {
 
 
     //商贷--lpr
-    $('#sd_lprNum').on('input propertychange', function () {
+    $('#sd_lprNum').on('input propertychange', function() {
         var sdlpr = $('#sd_lprNum').val();
         if (sdlpr == ' ' || sdlpr == null) {
             sdlpr == ''
@@ -421,7 +421,7 @@ $(function () {
     // })
 
 
-    $('#sd_jdNum').on('input propertychange', function () {
+    $('#sd_jdNum').on('input propertychange', function() {
         console.log('1212')
         var dkJdNum = $('#sd_jdNum').val();
         if (dkJdNum == ' ' || dkJdNum == null) {
@@ -449,7 +449,7 @@ $(function () {
                 }
                 if (dkJdNum.indexOf('.') != -1) {
                     $('#sd_jdNum').val(dkJdNum)
-                    setTimeout(function () {
+                    setTimeout(function() {
                         dkJdNum = Math.round(dkJdNum)
                         $('#sd_jdNum').val(dkJdNum)
                         $('#sd_jd').html(dkJdNum + '‱')
@@ -495,20 +495,20 @@ $(function () {
 
 
     //组合--重新填写
-    $('#pubAndSd_restart').on('click', function () {
+    $('#pubAndSd_restart').on('click', function() {
         $('#pub_loanAllMoney').val('')
         $('#showDatePicker span').html('30年(360期)')
         $('#pub_multiple').val(1);
-        $('#pub_loan_rateResult').html(3.1 + '%');
+        $('#pub_loan_rateResult').html(3.25 + '%');
         $('#sd_loanAllMoney').val('');
         $('#dk_showRate span').html('LPR浮动利率');
         $('#sd_multiple').val(1);
         $('#sd_loan_rateResult').html(4.9 + '%')
-        $('#sd_lprNum').val(4.2);
+        $('#sd_lprNum').val(4.45);
         $('#sd_jdNum').val(35)
-        $('#sd_lpr').html(4.2 + '%');
+        $('#sd_lpr').html(4.45 + '%');
         $('#sd_jd').html(35 + '‱')
-        $('#sd_loan_rateResult_1').html((4.2 + 0.35).toFixed(2) + '%')
+        $('#sd_loan_rateResult_1').html((4.45 + 0.35).toFixed(2) + '%')
         $('#dk_sdRate').hide();
         $('#dk_lpr').show();
         $('#dk_jd').show();
@@ -550,7 +550,7 @@ $(function () {
 
     //贷款计算
 
-    $('#calc').on('click', function () {
+    $('#calc').on('click', function() {
 
         //公积金--贷款总额
         var loanAllMoney_1 = $('#pub_loanAllMoney').val();

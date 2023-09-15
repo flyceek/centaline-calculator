@@ -39,13 +39,13 @@ $(function() {
         //按揭
         var a = $('#aj_multiple').val();
         a = Number.parseFloat(a)
-        var b = 3.1 * a;
+        var b = 3.25 * a;
         b = b.toFixed(2);
         $('#aj_loan_rateResult').html(b + '%');
         //贷款总额
         var c = $('#dk_multiple').val();
         c = Number.parseFloat(c);
-        var d = 3.1 * c;
+        var d = 3.25 * c;
         d = d.toFixed(2);
         $('#dk_loan_rateResult').html(d + '%')
 
@@ -206,12 +206,12 @@ $(function() {
         if (fhRate < 50) {
             //按首套算
             $('#aj_multiple').val(1)
-            $('#aj_loan_rateResult').html(3.1 * 1 + '%')
+            $('#aj_loan_rateResult').html(3.25 * 1 + '%')
 
         } else if (fhRate >= 50) {
             //按二套算
             $('#aj_multiple').val(1.1)
-            $('#aj_loan_rateResult').html(3.1 * 1.1 + '%')
+            $('#aj_loan_rateResult').html(3.25 * 1.1 + '%')
 
         }
 
@@ -323,7 +323,7 @@ $(function() {
         }
 
         $('#aj_multiple').val(ajMul);
-        $('#aj_loan_rateResult').html((3.1 * ajMul).toFixed(2) + '%')
+        $('#aj_loan_rateResult').html((3.25 * ajMul).toFixed(2) + '%')
 
         activeBtn();
     })
@@ -417,7 +417,7 @@ $(function() {
         }
 
         $('#dk_multiple').val(dkMul);
-        $('#dk_loan_rateResult').html((3.1 * dkMul).toFixed(2) + '%')
+        $('#dk_loan_rateResult').html((3.25 * dkMul).toFixed(2) + '%')
 
         activeBtn();
     })
@@ -431,7 +431,7 @@ $(function() {
         $('#gjj_loanAllMoney').val('');
         $('#showDatePicker span').html('30年(360期)')
         $('#aj_multiple').val(1);
-        $('#aj_loan_rateResult').html(3.1 + '%');
+        $('#aj_loan_rateResult').html(3.25 + '%');
         activeBtn();
     })
 
@@ -440,7 +440,7 @@ $(function() {
         $('#dk_loanALLMoney').val('');
         $('#dk_showDaTe span').html('30年(360期)')
         $('#dk_multiple').val(1);
-        $('#dk_loan_rateResult').html(3.1 + '%');
+        $('#dk_loan_rateResult').html(3.25 + '%');
         activeBtn();
     })
 

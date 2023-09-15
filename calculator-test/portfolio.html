@@ -75,8 +75,8 @@
                     <li>
                         <div class="w182">公积金利率</div>
                         <div class="w428 totalfs rate">
-                            <span id="pub_gjj">3.1</span><span style="margin: 0 .15rem;">x</span> <input onkeyup="this.value=this.value.replace(/\s/g,'')" id="pub_multiple" type="text" value="1" /> <span style="margin: 0 .15rem;">=</span> <span id="pub_loan_rateResult"
-                                class="loan-rateResult">3.1%</span>
+                            <span id="pub_gjj">3.25</span><span style="margin: 0 .15rem;">x</span> <input onkeyup="this.value=this.value.replace(/\s/g,'')" id="pub_multiple" type="text" value="1" /> <span style="margin: 0 .15rem;">=</span> <span id="pub_loan_rateResult"
+                                class="loan-rateResult">3.25%</span>
                         </div>
                     </li>
 
@@ -145,7 +145,7 @@
                             <div class="lprName-2">可手动修改</div>
                         </div>
                         <div class="w338">
-                            <input onkeyup="this.value=this.value.replace(/\s/g,'')" id="sd_lprNum" class="lprNum" type="text" value="4.2" />
+                            <input onkeyup="this.value=this.value.replace(/\s/g,'')" id="sd_lprNum" class="lprNum" type="text" value="4.45" />
                         </div>
                         <div style="float: right;color: #999;">%</div>
                     </li>
@@ -275,8 +275,8 @@
                     $('#showDatePicker span').html(result[0]);
                     console.log(result[0].match(/(\S*)年/)[1]);
                     if (result[0].match(/(\S*)年/)[1] > 5) {
-                        $('#pub_gjj').html(3.1)
-                        $('#pub_loan_rateResult').html((3.1 * $('#pub_multiple').val()).toFixed(2) + '%')
+                        $('#pub_gjj').html(3.25)
+                        $('#pub_loan_rateResult').html((3.25 * $('#pub_multiple').val()).toFixed(2) + '%')
 
                     } else if (result[0].match(/(\S*)年/)[1] <= 5) {
                         $('#pub_gjj').html(2.75)
@@ -301,16 +301,16 @@
                     $('#dk_showDaTe span').html(result[0]);
                     console.log(result[0].match(/(\S*)年/)[1]);
                     if (result[0].match(/(\S*)年/)[1] > 5) {
-                        $('#sd_lprNum').val(4.2)
-                        $('#sd_lpr').html(4.2 + '%')
+                        $('#sd_lprNum').val(4.45)
+                        $('#sd_lpr').html(4.45 + '%')
                         // $('#sd_jdNum').val(35)
                         // $('#sd_jd').html(35 + '‱')
                         // $('#sd_loan_rateResult_1').html(4.45 + $('#sd_jd').html().split('‱')[0] / 100 + '%')
                         isFirsthouseCheckedhandle()
 
                     } else if (result[0].match(/(\S*)年/)[1] <= 5) {
-                        $('#sd_lprNum').val(3.45)
-                        $('#sd_lpr').html(3.45 + '%')
+                        $('#sd_lprNum').val(3.7)
+                        $('#sd_lpr').html(3.7 + '%')
                         // $('#sd_jdNum').val(0)
                         // $('#sd_jd').html(0 + '‱')
                         // $('#sd_loan_rateResult_1').html(3.7 + $('#sd_jd').html().split('‱')[0] / 100 + '%')

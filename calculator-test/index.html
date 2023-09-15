@@ -124,7 +124,7 @@
                             <div class="lprName-2">可手动修改</div>
                         </div>
                         <div class="w338">
-                            <input id="aj_lprNum" class="lprNum" type="text" value="4.2" />
+                            <input id="aj_lprNum" class="lprNum" type="text" value="4.45" />
                         </div>
                         <div style="float: right;color: #999;">%</div>
                     </li>
@@ -209,7 +209,7 @@
                             <div class="lprName-2">可手动修改</div>
                         </div>
                         <div class="w368">
-                            <input id="dk_lprNum" class="lprNum" type="text" value="4.2" />
+                            <input id="dk_lprNum" class="lprNum" type="text" value="4.45" />
                         </div>
                         <div style="color: #999;float: right;">%</div>
                     </li>
@@ -400,8 +400,8 @@
                     console.log(result[0].match(/(\S*)年/)[1])
                     if (result[0].match(/(\S*)年/)[1] > 5) {
                         //大于五年
-                        $('#aj_lprNum').val(4.2)
-                        $('#aj_sdlpr').html(4.2 + '%')
+                        $('#aj_lprNum').val(4.45)
+                        $('#aj_sdlpr').html(4.45 + '%')
                         ajFirstHouseCheckedhandle()
                         // if ($('#first_houseRate').val() < 50) {
                         //     $('#aj_lprNum').val(4.45)
@@ -418,8 +418,8 @@
                         // }
                     } else if (result[0].match(/(\S*)年/)[1] <= 5) {
                         //小于等于5年
-                        $('#aj_lprNum').val(3.45)
-                        $('#aj_sdlpr').html(3.45 + '%')
+                        $('#aj_lprNum').val(3.7)
+                        $('#aj_sdlpr').html(3.7 + '%')
                         // $('#aj_jdNum').val(0)
                         // $('#aj_sdjd').html(0 + '‱')
                         // $('#loan_rateResult_1').html(3.7 + $('#aj_sdjd').html().split('‱')[0] / 100 + '%')
@@ -445,15 +445,15 @@
                     $('#dk_showDaTe span').html(result[0]);
                     console.log(result[0].match(/(\S*)年/)[1]);
                     if (result[0].match(/(\S*)年/)[1] > 5) {
-                        $('#dk_lprNum').val(4.2)
-                        $('#dk_sdlpr').html(4.2 + '%')
+                        $('#dk_lprNum').val(4.45)
+                        $('#dk_sdlpr').html(4.45 + '%')
                         // $('#dk_jdNum').val(35)
                         // $('#dk_sdjd').html(35 + '‱')
                         // $('#dk_loan_rateResult_1').html(4.45 + $('#aj_sdjd').html().split('‱')[0] / 100 + '%')
                         dkFirstHouseCheckedhandle()
                     } else if (result[0].match(/(\S*)年/)[1] <= 5) {
-                        $('#dk_lprNum').val(3.45)
-                        $('#dk_sdlpr').html(3.45 + '%')
+                        $('#dk_lprNum').val(3.7)
+                        $('#dk_sdlpr').html(3.7 + '%')
                         // $('#dk_jdNum').val(0)
                         // $('#dk_sdjd').html(0 + '‱')
                         // $('#dk_loan_rateResult_1').html(3.7 + $('#aj_sdjd').html().split('‱')[0] / 100 + '%')

@@ -1,7 +1,7 @@
-$(function () {
+$(function() {
 
     //按揭比例
-    $('#showDatePicker').on('click', function () {
+    $('#showDatePicker').on('click', function() {
         $("body").css("overflow", "hidden");
         $("#birthPicker").show();
         $("#rateStylePicker").hide();
@@ -10,7 +10,7 @@ $(function () {
         $("#typePicker").hide();
 
     })
-    $('#showTypePicker').on('click', function () {
+    $('#showTypePicker').on('click', function() {
         $("body").css("overflow", "hidden");
         $("#birthPicker").hide();
         $("#rateStylePicker").hide();
@@ -19,7 +19,7 @@ $(function () {
         $("#typePicker").show();
 
     })
-    $('#showRateStyle').on('click', function () {
+    $('#showRateStyle').on('click', function() {
         $("body").css("overflow", "hidden");
         $("#birthPicker").hide();
         $("#rateStylePicker").show();
@@ -27,10 +27,10 @@ $(function () {
         $("#rateStylePicker_1").hide();
         $("#typePicker").hide();
     })
-    $('.okPicker,.canclePicker').on('click', function () {
+    $('.okPicker,.canclePicker').on('click', function() {
         $("body").css("overflow", "auto");
     })
-    $('.accordingType ul li').on('click', function () {
+    $('.accordingType ul li').on('click', function() {
         $('.accordingType ul li').removeClass('accordingTypeSelected')
         $(this).addClass('accordingTypeSelected')
         if ($('.accordingTypeSelected span').html() == '根据按揭比例') {
@@ -44,7 +44,7 @@ $(function () {
     })
 
     //贷款总额
-    $('#dk_showDaTe').on('click', function () {
+    $('#dk_showDaTe').on('click', function() {
         $("body").css("overflow", "hidden");
         $("#birthPicker").hide();
         $("#rateStylePicker").hide();
@@ -53,7 +53,7 @@ $(function () {
         $("#typePicker").hide();
     })
 
-    $('#dk_showRate').on('click', function () {
+    $('#dk_showRate').on('click', function() {
         $("body").css("overflow", "hidden");
         $("#birthPicker").hide();
         $("#rateStylePicker").hide();
@@ -114,12 +114,12 @@ $(function () {
 
     }
     //截取参数
-    function canShu(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-        var r = window.location.search.substr(1).match(reg);
-        if (r != null)
-            return unescape(r[2]);
-        return null;
+    function  canShu(name)  { 
+        var  reg  =  new  RegExp("(^|&)"  +  name  +  "=([^&]*)(&|$)",  "i");        
+        var  r  =  window.location.search.substr(1).match(reg);        
+        if  (r  !=  null) 
+            return  unescape(r[2]);        
+        return  null;    
     }
 
 
@@ -128,7 +128,7 @@ $(function () {
     //按揭页面获取数
 
     //房屋总价获取数
-    $('#houseMoney').on('input propertychange', function () {
+    $('#houseMoney').on('input propertychange', function() {
         var hmAll = $('#houseMoney').val();
         // console.log(hmAll.split('.')[0])
         if (hmAll == ' ' || hmAll == null) {
@@ -162,111 +162,111 @@ $(function () {
     })
 
     //首付比例获取数
-    $('#first_houseRate').on('input propertychange', function () {
-        var fhRate = $('#first_houseRate').val();
-        if (fhRate == ' ' || fhRate == null) {
-            fhRate == ''
-        }
-        //判断是否是数字
-        if (!isNaN(fhRate)) {
-            //是数字
-            if (fhRate <= 0) {
-                fhRate = ''
+    $('#first_houseRate').on('input propertychange', function() {
+            var fhRate = $('#first_houseRate').val();
+            if (fhRate == ' ' || fhRate == null) {
+                fhRate == ''
+            }
+            //判断是否是数字
+            if (!isNaN(fhRate)) {
+                //是数字
+                if (fhRate <= 0) {
+                    fhRate = ''
+                    $('.promptBox').show()
+                    $('.promptBox span').html('请输入大于0的数字')
+                    setTimeout("$('.promptBox').hide()", 1000)
+                } else if (fhRate < 100) {
+                    if (fhRate.indexOf('.') != -1) {
+                        if (fhRate.split('.')[1].length > 2) {
+                            fhRate = Number.parseFloat(fhRate).toFixed(2)
+                        }
+                    }
+                } else {
+                    fhRate = 35
+                    $('.promptBox').show()
+                    $('.promptBox span').html('首付比例应小于100%')
+                    setTimeout("$('.promptBox').hide()", 1000)
+                }
+            } else {
+                //非数字
+                fhRate = 35
                 $('.promptBox').show()
-                $('.promptBox span').html('请输入大于0的数字')
+                $('.promptBox span').html('输入限>0的数字')
                 setTimeout("$('.promptBox').hide()", 1000)
-            } else if (fhRate < 100) {
-                if (fhRate.indexOf('.') != -1) {
-                    if (fhRate.split('.')[1].length > 2) {
-                        fhRate = Number.parseFloat(fhRate).toFixed(2)
+            }
+            $('#first_houseRate').val(fhRate);
+            if (fhRate < 50) {
+                //首付比例《50
+
+                if ($('#showDatePicker span').html().match(/(\S*)年/)[1] > 5) {
+                    $('#aj_sdlpr').html(4.45 + '%')
+                    $('#aj_lprNum').val(4.45)
+                    $('#aj_jdNum').val(35)
+                    $('#aj_sdjd').html(35 + '‱')
+                    $('#loan_rateResult_1').html(4.45 + 0.35 + '%')
+                } else if ($('#showDatePicker span').html().match(/(\S*)年/)[1] <= 5) {
+                    $('#aj_sdlpr').html(3.7 + '%')
+                    $('#aj_lprNum').val(3.7)
+                    $('#aj_jdNum').val(0)
+                    $('#aj_sdjd').html(0 + '‱')
+                    $('#loan_rateResult_1').html(3.7 + 0 + '%')
+                }
+
+
+            } else if (fhRate >= 50) {
+
+                if ($('#showDatePicker span').html().match(/(\S*)年/)[1] > 5) {
+                    $('#aj_sdlpr').html(4.45 + '%')
+                    $('#aj_lprNum').val(4.45)
+                    $('#aj_jdNum').val(105)
+                    $('#aj_sdjd').html(105 + '‱')
+                    $('#loan_rateResult_1').html(4.45 + 1.05 + '%')
+                } else if ($('#showDatePicker span').html().match(/(\S*)年/)[1] <= 5) {
+                    $('#aj_sdlpr').html(3.7 + '%')
+                    $('#aj_lprNum').val(3.7)
+                    $('#aj_jdNum').val(0)
+                    $('#aj_sdjd').html(0 + '‱')
+                    $('#loan_rateResult_1').html(3.7 + 0 + '%')
+                }
+
+            }
+            activeBtn();
+        })
+        //旧版本基准利率---商贷利率折扣
+        $('#aj_benchmark_num').on('input propertychange', function() {
+            var aj_benchmark_num = $('#aj_benchmark_num').val();
+            if (aj_benchmark_num == ' ' || aj_benchmark_num == null) {
+                aj_benchmark_num == ''
+            }
+            //判断是否是数字
+            if (!isNaN(aj_benchmark_num)) {
+                //是数字
+                if (aj_benchmark_num < 0) {
+                    aj_benchmark_num = 1
+                    $('.promptBox').show()
+                    $('.promptBox span').html('请输入大于0的数字')
+                    setTimeout("$('.promptBox').hide()", 1000)
+                } else {
+                    if (aj_benchmark_num.indexOf('.') != -1) {
+                        if (aj_benchmark_num.split('.')[1].length > 2) {
+                            aj_benchmark_num = Number.parseFloat(aj_benchmark_num).toFixed(2)
+                        }
                     }
                 }
             } else {
-                fhRate = 35
-                $('.promptBox').show()
-                $('.promptBox span').html('首付比例应小于100%')
-                setTimeout("$('.promptBox').hide()", 1000)
-            }
-        } else {
-            //非数字
-            fhRate = 35
-            $('.promptBox').show()
-            $('.promptBox span').html('输入限>0的数字')
-            setTimeout("$('.promptBox').hide()", 1000)
-        }
-        $('#first_houseRate').val(fhRate);
-        if (fhRate < 50) {
-            //首付比例《50
-
-            if ($('#showDatePicker span').html().match(/(\S*)年/)[1] > 5) {
-                $('#aj_sdlpr').html(4.2 + '%')
-                $('#aj_lprNum').val(4.2)
-                $('#aj_jdNum').val(35)
-                $('#aj_sdjd').html(35 + '‱')
-                $('#loan_rateResult_1').html(4.2 + 0.35 + '%')
-            } else if ($('#showDatePicker span').html().match(/(\S*)年/)[1] <= 5) {
-                $('#aj_sdlpr').html(3.45 + '%')
-                $('#aj_lprNum').val(3.45)
-                $('#aj_jdNum').val(0)
-                $('#aj_sdjd').html(0 + '‱')
-                $('#loan_rateResult_1').html(3.45 + 0 + '%')
-            }
-
-
-        } else if (fhRate >= 50) {
-
-            if ($('#showDatePicker span').html().match(/(\S*)年/)[1] > 5) {
-                $('#aj_sdlpr').html(4.2 + '%')
-                $('#aj_lprNum').val(4.2)
-                $('#aj_jdNum').val(105)
-                $('#aj_sdjd').html(105 + '‱')
-                $('#loan_rateResult_1').html(4.2 + 1.05 + '%')
-            } else if ($('#showDatePicker span').html().match(/(\S*)年/)[1] <= 5) {
-                $('#aj_sdlpr').html(3.45 + '%')
-                $('#aj_lprNum').val(3.45)
-                $('#aj_jdNum').val(0)
-                $('#aj_sdjd').html(0 + '‱')
-                $('#loan_rateResult_1').html(3.45 + 0 + '%')
-            }
-
-        }
-        activeBtn();
-    })
-    //旧版本基准利率---商贷利率折扣
-    $('#aj_benchmark_num').on('input propertychange', function () {
-        var aj_benchmark_num = $('#aj_benchmark_num').val();
-        if (aj_benchmark_num == ' ' || aj_benchmark_num == null) {
-            aj_benchmark_num == ''
-        }
-        //判断是否是数字
-        if (!isNaN(aj_benchmark_num)) {
-            //是数字
-            if (aj_benchmark_num < 0) {
+                //非数字
                 aj_benchmark_num = 1
                 $('.promptBox').show()
                 $('.promptBox span').html('请输入大于0的数字')
                 setTimeout("$('.promptBox').hide()", 1000)
-            } else {
-                if (aj_benchmark_num.indexOf('.') != -1) {
-                    if (aj_benchmark_num.split('.')[1].length > 2) {
-                        aj_benchmark_num = Number.parseFloat(aj_benchmark_num).toFixed(2)
-                    }
-                }
             }
-        } else {
-            //非数字
-            aj_benchmark_num = 1
-            $('.promptBox').show()
-            $('.promptBox span').html('请输入大于0的数字')
-            setTimeout("$('.promptBox').hide()", 1000)
-        }
+    
+            $('#aj_benchmark_num').val(aj_benchmark_num);
+            $('#loan_rateResult').html(($('#aj_multiple').val() * aj_benchmark_num).toFixed(2) + '%')
+            activeBtn();
+        });
 
-        $('#aj_benchmark_num').val(aj_benchmark_num);
-        $('#loan_rateResult').html(($('#aj_multiple').val() * aj_benchmark_num).toFixed(2) + '%')
-        activeBtn();
-    });
-
-    $('#aj_multiple').on('input propertychange', function () {
+    $('#aj_multiple').on('input propertychange', function() {
         var ajMul = $('#aj_multiple').val();
         console.log(ajMul)
         if (ajMul == ' ' || ajMul == null) {
@@ -308,7 +308,7 @@ $(function () {
         activeBtn();
     });
     //lpr手动修改
-    $('#aj_lprNum').on('input propertychange', function () {
+    $('#aj_lprNum').on('input propertychange', function() {
         var ajLpr = $('#aj_lprNum').val();
         if (ajLpr == ' ' || ajLpr == null) {
             ajLpr = ''
@@ -322,7 +322,7 @@ $(function () {
                 setTimeout("$('.promptBox').hide()", 1000)
             } else {
                 if (ajLpr > 10) {
-                    ajLpr = 4.2
+                    ajLpr = 4.45
                     $('.promptBox').show()
                     $('.promptBox span').html('请输入大于0且小于10的数字')
                     setTimeout("$('.promptBox').hide()", 1000)
@@ -338,7 +338,7 @@ $(function () {
 
         } else {
             //非数字
-            ajLpr = 4.2
+            ajLpr = 4.45
             $('.promptBox').show()
             $('.promptBox span').html('请输入大于0且小于10的数字')
             setTimeout("$('.promptBox').hide()", 1000)
@@ -395,7 +395,7 @@ $(function () {
     //     $('#loan_rateResult_1').html(a_cal + '%')
     // })
 
-    $('#aj_jdNum').on('input propertychange', function () {
+    $('#aj_jdNum').on('input propertychange', function() {
         console.log('1212')
         var ajJdNum = $('#aj_jdNum').val();
         if (ajJdNum == ' ' || ajJdNum == null) {
@@ -419,7 +419,7 @@ $(function () {
                 }
                 if (ajJdNum.indexOf('.') != -1) {
                     $('#aj_jdNum').val(ajJdNum)
-                    setTimeout(function () {
+                    setTimeout(function() {
                         ajJdNum = Math.round(ajJdNum)
                         $('#aj_jdNum').val(ajJdNum)
                         $('#aj_sdjd').html(ajJdNum + '‱')
@@ -458,18 +458,18 @@ $(function () {
 
 
     //重新填写--按揭
-    $('#aj_restart').on('click', function () {
+    $('#aj_restart').on('click', function() {
         $('#houseMoney').val('')
         $('#first_houseRate').val(35)
         $('#showDatePicker span').html('30年(360期)')
         $('#showRateStyle span').html('LPR浮动利率')
         $('#aj_multiple').val(1);
         $('#loan_rateResult').html(4.9 + '%')
-        $('#aj_lprNum').val(4.2)
+        $('#aj_lprNum').val(4.45)
         $('#aj_jdNum').val(35)
-        $('#aj_sdlpr').html(4.2 + '%')
+        $('#aj_sdlpr').html(4.45 + '%')
         $('#aj_sdjd').html(35 + '‱')
-        $('#loan_rateResult_1').html((4.2 + 0.35).toFixed(2) + '%')
+        $('#loan_rateResult_1').html((4.45 + 0.35).toFixed(2) + '%')
         $('#aj_sdRate').hide();
         $('#aj_lpr').show();
         $('#aj_jd').show();
@@ -483,7 +483,7 @@ $(function () {
 
     //贷款总额页面
     //贷款总额判断
-    $('#dk_loanAllMoney').on('input propertychange', function () {
+    $('#dk_loanAllMoney').on('input propertychange', function() {
         var dk_loanAllMoney = $('#dk_loanAllMoney').val();
         console.log(dk_loanAllMoney)
         if (dk_loanAllMoney == ' ' || dk_loanAllMoney == null) {
@@ -521,7 +521,7 @@ $(function () {
 
     //旧基准版本利率-商贷利率倍数
 
-    $('#dk_benchmark_num').on('input propertychange', function () {
+    $('#dk_benchmark_num').on('input propertychange', function() {
         var dk_benchmark_num = $('#dk_benchmark_num').val();
         if (dk_benchmark_num == ' ' || dk_benchmark_num == null) {
             dk_benchmark_num == ''
@@ -556,7 +556,7 @@ $(function () {
 
     })
 
-    $('#dk_multiple').on('input propertychange', function () {
+    $('#dk_multiple').on('input propertychange', function() {
         var dkMul = $('#dk_multiple').val();
         if (dkMul == ' ' || dkMul == null) {
             dkMul == ''
@@ -599,7 +599,7 @@ $(function () {
     })
 
     //lpr手动修改
-    $('#dk_lprNum').on('input propertychange', function () {
+    $('#dk_lprNum').on('input propertychange', function() {
         var ajLpr = $('#dk_lprNum').val();
         if (ajLpr == ' ' || ajLpr == null) {
             ajLpr = ''
@@ -686,7 +686,7 @@ $(function () {
     // });
 
 
-    $('#dk_jdNum').on('input propertychange', function () {
+    $('#dk_jdNum').on('input propertychange', function() {
         console.log('1212')
         var dkJdNum = $('#dk_jdNum').val();
         if (dkJdNum == ' ' || dkJdNum == null) {
@@ -710,7 +710,7 @@ $(function () {
                 }
                 if (dkJdNum.indexOf('.') != -1) {
                     $('#dk_jdNum').val(dkJdNum)
-                    setTimeout(function () {
+                    setTimeout(function() {
                         dkJdNum = Math.round(dkJdNum)
                         $('#dk_jdNum').val(dkJdNum)
                         $('#dk_sdjd').html(dkJdNum + '‱')
@@ -749,17 +749,17 @@ $(function () {
 
 
     //重新填写--贷款总额
-    $('#dk_restart').on('click', function () {
+    $('#dk_restart').on('click', function() {
         $('#dk_loanAllMoney').val('');
         $('#dk_showDaTe span').html('30年(360期)');
         $('#dk_showRate span').html('LPR浮动利率');
         $('#dk_multiple').val(1);
         $('#dk_loan_rateResult').html(4.9 + '%');
-        $('#dk_lprNum').val(4.2);
+        $('#dk_lprNum').val(4.45);
         $('#dk_jdNum').val(35);
-        $('#dk_sdlpr').html(4.2 + '%');
+        $('#dk_sdlpr').html(4.45 + '%');
         $('#dk_sdjd').html(35 + '‱');
-        $('#dk_loan_rateResult_1').html((4.2 + 0.35).toFixed(2) + '%')
+        $('#dk_loan_rateResult_1').html((4.45 + 0.35).toFixed(2) + '%')
         $('#dk_sdRate').hide();
         $('#dk_lpr').show();
         $('#dk_jd').show();
@@ -790,7 +790,7 @@ $(function () {
         } else if (typeStyle == '根据贷款总额') {
             var b = $('#dk_showRate span').html();
             if (b == '旧版本基准利率') {
-                if ($('#dk_loanAllMoney').val() != null && $('#dk_loanAllMoney').val() != '' && $('#dk_multiple').val() != null && $('#dk_multiple').val() != '' && $('#dk_benchmark_num').val() != null && $('#dk_benchmark_num').val() != '') {
+                if ($('#dk_loanAllMoney').val() != null && $('#dk_loanAllMoney').val() != '' && $('#dk_multiple').val() != null && $('#dk_multiple').val() != ''  && $('#dk_benchmark_num').val() != null && $('#dk_benchmark_num').val() != '') {
                     bl = true
                 }
             } else if (b == 'LPR浮动利率') {
@@ -812,7 +812,7 @@ $(function () {
 
     //点击按钮进行等额本息和等额本金的计算
 
-    $('#calc').on('click', function () {
+    $('#calc').on('click', function() {
 
         var sdType = $('.accordingTypeSelected span').html()
         var loanAllMoney = '';
