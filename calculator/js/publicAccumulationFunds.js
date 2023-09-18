@@ -1,4 +1,67 @@
 $(function() {
+    console.log('paranora')
+
+    /* 2023 09 17 */
+    function setLoanInterestRateBaseText(){
+        $('#dk_gjj').text(getRadioLoanInterestRate());
+        $('input[type=text][id=dk_multiple]').trigger("propertychange");
+    }
+
+    function getRatioLoanInterestRateElementGroup(){
+        return $('input[type=radio][name=isFristLoan]');
+    }
+
+    function getRadioLoanInterestRate(){
+        var rate=getRatioLoanInterestRateElementGroup().filter(':checked').val();
+        console.log("getloanInterestRate :"+rate);
+        if(rate==null || typeof rate =='undefined'){
+            rate=3.1;
+        }
+        return parseFloat(rate);
+    }
+
+    function setRatioLoanInterestRateElementGroupSelect(selectIndex){
+        var group=getRatioLoanInterestRateElementGroup();
+        for(var index=0;index<group.length;index++){
+            group.eq(index).removeProp('checked');
+            if(index==selectIndex){
+                group.eq(index).prop('checked', 'checked');
+            }
+        }
+        setLoanInterestRateBaseText();
+    }
+
+    function setRatioLoanInterestRateDefault(){
+        setRatioLoanInterestRateElementGroupSelect(0);
+    }
+
+    function ratioLoanInterestRateElementGroupOnChange(){
+        var value=this.value;
+        console.log("on change value :"+value);
+        setLoanInterestRateBaseText();     
+    }
+
+    // var v1=getloanInterestRate();
+    // console.log(v1);
+
+    $(document).ready(function() {
+        setRatioLoanInterestRateDefault();
+        getRatioLoanInterestRateElementGroup().change(function() {
+            ratioLoanInterestRateElementGroupOnChange.apply(this);
+        });
+
+        $("#firstLoanCase").click(function(){
+            console.log('firstLoanCase')
+            setRatioLoanInterestRateElementGroupSelect(0);
+        });
+
+        $("#secondLoanCase").click(function(){
+            console.log('secondLoanCase')
+            setRatioLoanInterestRateElementGroupSelect(1);
+        });
+    });
+    /* 2023 09 17 */
+
 
     //按揭比例
     $('#showDatePicker').on('click', function() {
@@ -36,17 +99,20 @@ $(function() {
     init();
 
     function init() {
+        var loanInterestRate=getRadioLoanInterestRate();
         //按揭
         var a = $('#aj_multiple').val();
         a = Number.parseFloat(a)
-        var b = 3.1 * a;
-        b = b.toFixed(2);
+        // var b = 3.1 * a;
+        var b = loanInterestRate * a;
+        b = b.toFixed(3);
         $('#aj_loan_rateResult').html(b + '%');
         //贷款总额
         var c = $('#dk_multiple').val();
         c = Number.parseFloat(c);
-        var d = 3.1 * c;
-        d = d.toFixed(2);
+        // var d = 3.1 * c;
+        var d = loanInterestRate * c;
+        d = d.toFixed(3);
         $('#dk_loan_rateResult').html(d + '%')
 
         //影藏头部
@@ -74,18 +140,13 @@ $(function() {
 
 
     //截取参数
-    function  canShu(name)  { 
-        var  reg  =  new  RegExp("(^|&)"  +  name  +  "=([^&]*)(&|$)",  "i");        
-        var  r  =  window.location.search.substr(1).match(reg);        
-        if  (r  !=  null) 
-            return  unescape(r[2]);        
-        return  null;    
+    function canShu(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r!= null)
+            return unescape(r[2]);
+        return null;
     }
-
-
-
-
-
 
 
     //页面获取数据
@@ -108,7 +169,7 @@ $(function() {
                 } else {
                     if (hmAll.indexOf('.') != -1) {
                         if (hmAll.split('.')[1].length > 2) {
-                            hmAll = Number.parseFloat(hmAll).toFixed(2)
+                            hmAll = Number.parseFloat(hmAll).toFixed(3)
                         }
                     }
                 }
@@ -127,7 +188,7 @@ $(function() {
             var loanAllMoneyMax=144;
             var loanAllMoney = hmAll * (1 - fhRate / 100);
             if (loanAllMoney <= loanAllMoneyMax) {
-                loanAllMoney = loanAllMoney.toFixed(2)
+                loanAllMoney = loanAllMoney.toFixed(3)
                 if (loanAllMoney == 0.00) {
                     loanAllMoney = ''
                 }
@@ -205,16 +266,18 @@ $(function() {
         }
         $('#first_houseRate').val(fhRate);
 
+        var loanInterestRate=getRadioLoanInterestRate();
         if (fhRate < 50) {
             //按首套算
             $('#aj_multiple').val(1)
-            $('#aj_loan_rateResult').html(3.1 * 1 + '%')
+            // $('#aj_loan_rateResult').html(3.1 * 1 + '%')
+            $('#aj_loan_rateResult').html(loanInterestRate * 1 + '%')
 
         } else if (fhRate >= 50) {
             //按二套算
             $('#aj_multiple').val(1.1)
-            $('#aj_loan_rateResult').html(3.1 * 1.1 + '%')
-
+            // $('#aj_loan_rateResult').html(3.1 * 1.1 + '%')
+            $('#aj_loan_rateResult').html(loanInterestRate * 1.1 + '%')
         }
 
         //获取房屋总价
@@ -324,8 +387,9 @@ $(function() {
         }
 
         $('#aj_multiple').val(ajMul);
-        $('#aj_loan_rateResult').html((3.1 * ajMul).toFixed(2) + '%')
-
+        // $('#aj_loan_rateResult').html((3.1 * ajMul).toFixed(2) + '%')
+        var loanInterestRate=getRadioLoanInterestRate();
+        $('#aj_loan_rateResult').html((loanInterestRate * ajMul).toFixed(3) + '%')
         activeBtn();
     })
 
@@ -414,7 +478,9 @@ $(function() {
         }
 
         $('#dk_multiple').val(dkMul);
-        $('#dk_loan_rateResult').html((3.1 * dkMul).toFixed(2) + '%')
+        // $('#dk_loan_rateResult').html((3.1 * dkMul).toFixed(2) + '%')
+        var loanInterestRate=getRadioLoanInterestRate();
+        $('#dk_loan_rateResult').html((loanInterestRate * dkMul).toFixed(3) + '%')
 
         activeBtn();
     })
@@ -428,7 +494,8 @@ $(function() {
         $('#gjj_loanAllMoney').val('');
         $('#showDatePicker span').html('30年(360期)')
         $('#aj_multiple').val(1);
-        $('#aj_loan_rateResult').html(3.1 + '%');
+        // $('#aj_loan_rateResult').html(3.1 + '%');
+        setRatioLoanInterestRateDefault();
         activeBtn();
     })
 
@@ -437,7 +504,8 @@ $(function() {
         $('#dk_loanALLMoney').val('');
         $('#dk_showDaTe span').html('30年(360期)')
         $('#dk_multiple').val(1);
-        $('#dk_loan_rateResult').html(3.1 + '%');
+        // $('#dk_loan_rateResult').html(3.1 + '%');
+        setRatioLoanInterestRateDefault();
         activeBtn();
     })
 
@@ -466,9 +534,7 @@ $(function() {
         }
     }
 
-
     //贷款计算
-
     $('#calc').on('click', function() {
         // var sdType = $('.accordingTypeSelected span').html()
         var sdType = '根据贷款总额'
@@ -488,7 +554,6 @@ $(function() {
             loanAllMoney = $('#dk_loanALLMoney').val();
             months = $('#dk_showDaTe span').html().match(/(\S*)年/)[1] * 12;
             monthRate = $('#dk_loan_rateResult').html().match(/(\S*)%/)[1] / 1200
-
         }
         activeBtn();
 
@@ -497,7 +562,5 @@ $(function() {
             //window.location.href = 'result-indexOrPublic.html?EqualPrincipalAndInterest_1=' + escape(JSON.stringify(EqualPrincipalAndInterest_1)) + '&everyMonthlyprincipal_1=' + escape(JSON.stringify(everyMonthlyprincipal_1));
             window.location.href = 'result-indexOrPublic.html?loanAllMoney=' + loanAllMoney + '&monthRate=' + monthRate + '&months=' + months;
         }
-
-
     })
 })
