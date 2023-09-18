@@ -1,4 +1,65 @@
 $(function () {
+    console.log('paranora')
+    /* 2023 09 17 */
+    function setLoanInterestRateBaseText(){
+        $('#pub_gjj').text(getRadioLoanInterestRate());
+        $('input[type=text][id=pub_multiple]').trigger("propertychange");
+    }
+
+    function getRatioLoanInterestRateElementGroup(){
+        return $('input[type=radio][name=isFristLoan]');
+    }
+
+    function getRadioLoanInterestRate(){
+        var rate=getRatioLoanInterestRateElementGroup().filter(':checked').val();
+        console.log("getloanInterestRate :"+rate);
+        if(rate==null || typeof rate =='undefined'){
+            rate=3.1;
+        }
+        return parseFloat(rate);
+    }
+
+    function setRatioLoanInterestRateElementGroupSelect(selectIndex){
+        var group=getRatioLoanInterestRateElementGroup();
+        for(var index=0;index<group.length;index++){
+            group.eq(index).removeProp('checked');
+            if(index==selectIndex){
+                group.eq(index).prop('checked', 'checked');
+            }
+        }
+        setLoanInterestRateBaseText();
+    }
+
+    function setRatioLoanInterestRateDefault(){
+        setRatioLoanInterestRateElementGroupSelect(0);
+    }
+
+    function ratioLoanInterestRateElementGroupOnChange(){
+        var value=this.value;
+        console.log("on change value :"+value);
+        setLoanInterestRateBaseText();     
+    }
+
+    // var v1=getloanInterestRate();
+    // console.log(v1);
+
+    $(document).ready(function() {
+        setRatioLoanInterestRateDefault();
+        getRatioLoanInterestRateElementGroup().change(function() {
+            ratioLoanInterestRateElementGroupOnChange.apply(this);
+        });
+
+        $("#firstLoanCase").click(function(){
+            console.log('firstLoanCase')
+            setRatioLoanInterestRateElementGroupSelect(0);
+        });
+
+        $("#secondLoanCase").click(function(){
+            console.log('secondLoanCase')
+            setRatioLoanInterestRateElementGroupSelect(1);
+        });
+    });
+    /* 2023 09 17 */
 
     //公积金
     $('#showDatePicker').on('click', function () {
@@ -32,13 +93,12 @@ $(function () {
     init();
 
 
-
-
     function init() {
         var a = $('#pub_multiple').val();
         a = Number.parseFloat(a);
-        var b = a * 3.1
-        b = b.toFixed(2);
+        // var b = a * 3.1
+        var b = a * getRadioLoanInterestRate();
+        b = b.toFixed(3);
         $('#pub_loan_rateResult').html(b + '%');
         var c = $('#sd_lprNum').val();
         $('#sd_lpr').html(c + '%')
@@ -47,14 +107,11 @@ $(function () {
         $('#sd_jd').html(d + '‱')
         d = Number.parseFloat(d) / 100;
         var e = c + d;
-        e = e.toFixed(2)
-
+        e = e.toFixed(3)
 
         $('#sd_loan_rateResult_1').html(e + '%')
 
-
         //影藏头部
-
         var urlData = window.location.href;
         urlData = urlData.split('?')[1];
         if (urlData != undefined) {
@@ -213,7 +270,9 @@ $(function () {
         }
 
         $('#pub_multiple').val(pubMul);
-        $('#pub_loan_rateResult').html((pubMul * 3.1).toFixed(2) + '%')
+        // $('#pub_loan_rateResult').html((pubMul * 3.1).toFixed(2) + '%')
+        var loanInterestRate=getRadioLoanInterestRate();
+        $('#pub_loan_rateResult').html((pubMul * loanInterestRate).toFixed(3) + '%')
         activeBtn();
 
     })
@@ -488,19 +547,12 @@ $(function () {
     })
 
 
-
-
-
-
-
-
-
     //组合--重新填写
     $('#pubAndSd_restart').on('click', function () {
         $('#pub_loanAllMoney').val('')
         $('#showDatePicker span').html('30年(360期)')
         $('#pub_multiple').val(1);
-        $('#pub_loan_rateResult').html(3.1 + '%');
+        // $('#pub_loan_rateResult').html(3.1 + '%');
         $('#sd_loanAllMoney').val('');
         $('#dk_showRate span').html('LPR浮动利率');
         $('#sd_multiple').val(1);
@@ -514,6 +566,7 @@ $(function () {
         $('#dk_lpr').show();
         $('#dk_jd').show();
         $('#dk_lprsdRate').show();
+        setRatioLoanInterestRateDefault();
     })
 
 
@@ -547,10 +600,7 @@ $(function () {
 
     }
 
-
-
     //贷款计算
-
     $('#calc').on('click', function () {
 
         //公积金--贷款总额
@@ -572,7 +622,6 @@ $(function () {
         }
 
 
-
         activeBtn();
 
         //跳转页面
@@ -581,13 +630,6 @@ $(function () {
             window.location.href = 'result-portfolio.html?loanAllMoney_1=' + loanAllMoney_1 + '&months_1=' + months_1 + '&monthRate_1=' + monthRate_1 + '&loanAllMoney_2=' + loanAllMoney_2 + '&months_2=' + months_2 + '&monthRate_2=' + monthRate_2;
         }
 
-
-
-
-
     })
-
-
-
 
 })
